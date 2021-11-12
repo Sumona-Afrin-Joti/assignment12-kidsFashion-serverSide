@@ -56,6 +56,23 @@ async function run() {
       console.log(result);
       res.send(result)
 
+    });
+
+    app.get('/orders', async (req, res) => {
+      const cursor = orderCollection.find({});
+      const orders = await cursor.toArray();
+      res.send(orders)
+    });
+
+    // delete single order from  order collection
+
+    app.delete('/orders/:id', async (req, res) => {
+      const id = req.params.id;
+      const query = { _id: ObjectId(id) };
+      const singleOrder = orderCollection.findOne(query);
+      const result = await orderCollection.deleteOne(singleOrder);
+
+      console.log('result', result)
     })
 
 
