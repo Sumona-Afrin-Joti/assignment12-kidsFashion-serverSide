@@ -70,7 +70,7 @@ async function run() {
       const id = req.params.id;
       const query = { _id: ObjectId(id) };
       const result = await orderCollection.deleteOne(query);
-      console.log('result', result)
+      res.send(result)
     })
 
 
@@ -101,7 +101,6 @@ async function run() {
     //update or upsert user as admin
     app.put('/users', async (req, res) => {
       const email = req.body.email;
-      console.log(email);
       const filter = { email: email };
       const options = { upsert: true };
       const updateDoc = {
