@@ -69,9 +69,7 @@ async function run() {
     app.delete('/orders/:id', async (req, res) => {
       const id = req.params.id;
       const query = { _id: ObjectId(id) };
-      const singleOrder = orderCollection.findOne(query);
-      const result = await orderCollection.deleteOne(singleOrder);
-
+      const result = await orderCollection.deleteOne(query);
       console.log('result', result)
     })
 
@@ -115,9 +113,6 @@ async function run() {
       const result = await userCollection.updateOne(filter, updateDoc, options);
       res.send(result)
     });
-
-
-
 
     // get user in order to check the user is admin or not;
 
